@@ -5,7 +5,7 @@ import "./BoxInterface.sol";
 
 contract BoxAdmin {
 
-  function readValueUsingInterface(address box_address) external returns (uint){
+  function readValueUsingInterface(address box_address) external view returns (uint){
     return BoxInterface(box_address).getValue();
   }
 
