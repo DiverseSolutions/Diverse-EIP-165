@@ -7,12 +7,13 @@ import "./ERC165.sol";
 contract BoxAdminSimpleERC165Implementation {
 
   function readValue(address box_address) external view returns (uint){
-    if(ERC165(box_address).supportsInterface(0x75b24222)){
-      // If contract supports BoxInterface
-      return BoxInterface(box_address).getValue();
-    }else{
+
+    if(ERC165(box_address).supportsInterface(0x75b24222) == false){
       revert("Contract Doesn't Support Box Interface");
     }
+
+    // If contract supports BoxInterface
+    return BoxInterface(box_address).getValue();
   }
 
 }

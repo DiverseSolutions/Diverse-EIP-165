@@ -24,17 +24,25 @@ describe("BoxAdminSimpleERC165Implementation", function () {
   it("Testing readValue()", async function () {
     const BoxSimpleERC165Implementation = await ethers.getContractFactory("BoxSimpleERC165Implementation")
     const BoxAdminSimpleERC165Implementation = await ethers.getContractFactory("BoxAdminSimpleERC165Implementation")
+    const Box = await ethers.getContractFactory("Box")
+    const BoxWithERC165 = await ethers.getContractFactory("BoxWithERC165")
 
     const boxContract = await BoxSimpleERC165Implementation.deploy()
     const boxAdminContract = await BoxAdminSimpleERC165Implementation.deploy()
+    const box = await Box.deploy()
+    const boxWithERC165 = await BoxWithERC165.deploy()
 
     await boxContract.deployed()
     await boxAdminContract.deployed()
+    await box.deployed()
 
     await (await boxContract.setValue(10)).wait()
-    expect(await boxContract.getValue()).to.equal("10");
+    expect(await boxContract.getValue()).to.equal("10")
 
-    expect(await boxAdminContract.readValue(boxContract.address)).to.equal("10");
+    expect(await boxAdminContract.readValue(boxContract.address)).to.equal("10")
+    await expect(boxAdminContract.readValue(box.address)).to.be.reverted
+    await expect(boxAdminContract.readValue(boxWithERC165.address)).to.be.revertedWith("Contract Doesn't Support Box Interface")
+    
   })
   
 })
