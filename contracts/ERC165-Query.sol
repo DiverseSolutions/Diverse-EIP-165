@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
 contract ERC165Query {
     bytes4 constant InvalidID = 0xffffffff;
     bytes4 constant ERC165ID = 0x01ffc9a7;
 
-    function doesContractImplementInterface(address _contract, bytes4 _interfaceId) external returns (bool) {
+    function doesContractImplementInterface(address _contract, bytes4 _interfaceId) view external returns (bool) {
         uint256 success;
         uint256 result;
 
@@ -25,7 +26,7 @@ contract ERC165Query {
         return false;
     }
 
-    function noThrowCall(address _contract, bytes4 _interfaceId) internal returns (uint256 success, uint256 result) {
+    function noThrowCall(address _contract, bytes4 _interfaceId) internal view returns (uint256 success, uint256 result) {
         bytes4 erc165ID = ERC165ID;
 
         assembly {

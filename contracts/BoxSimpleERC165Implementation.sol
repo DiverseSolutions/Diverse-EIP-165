@@ -20,7 +20,7 @@ contract BoxSimpleERC165Implementation {
     return i.getValue.selector ^ i.setValue.selector; 
   }
 
-  function supportsInterface(bytes4 interfaceID) external view returns (bool) {
+  function supportsInterface(bytes4 interfaceID) external pure returns (bool) {
     // return interfaceID == 0x01ffc9a7 || interfaceID == 0x75b24222;
     BoxInterface _box;
     ERC165 _erc165;

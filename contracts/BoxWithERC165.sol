@@ -14,7 +14,7 @@ contract BoxWithERC165 is ERC165 {
     return value;
   }
 
-  function supportsInterface(bytes4 interfaceID) external view returns (bool) {
+  function supportsInterface(bytes4 interfaceID) external pure returns (bool) {
     return interfaceID == 0x01ffc9a7;
   }
 }
